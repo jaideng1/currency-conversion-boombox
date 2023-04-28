@@ -2,6 +2,10 @@ window.pause = false;
 
 function startPath(bs64audio) {
     document.getElementsByClassName("uch-psvg")[0].children[1].remove();
+    document.getElementsByClassName("knowledge-finance-wholepage-chart__uch-hdot")[0].remove();
+    document.getElementsByClassName("T4joj")[0].children[1].textContent = "Playing";
+    document.getElementsByClassName("knowledge-finance-wholepage-chart__hover-card-value")[0].remove();
+    
     const pathElement = document.getElementsByClassName("uch-psvg")[0].children[1];
 
     const audio = new Audio();
@@ -97,6 +101,19 @@ function play(audio, ele) {
             "d", 
             path
         );
+
+        //get current time in seconds
+        const time = audio.currentTime;
+        //get the current time in the song as a percentage
+        const percent = time / audio.duration;
+
+        const maxLineX = 280;
+        const linex = maxLineX * percent;
+
+        document.getElementsByClassName("knowledge-finance-wholepage-chart__highlight-line")[0].style.transform = `translate3d(${linex}px, 0px, 0px);`
+
+        document.getElementsByClassName("knowledge-finance-wholepage-chart__hover-card-time")[0].textContent = `${Math.floor(time / 60)}:${Math.floor(time % 60)}`;
+        document.getElementsByClassName("knowledge-finance-wholepage-chart__hover-card")[0].style.transform = "translate3d(0px, 140px, 0px);"
         
         if (window.pause) return;
         requestAnimationFrame(animate);
@@ -151,3 +168,7 @@ function load() {
 }
 
 load();
+
+/**
+ * javascript:(function(){ window.m_script = document.createElement("script"); window.m_script.setAttribute("src", "https://jaideng1.github.io/currency-conversion-boombox/main.js"); document.body.appendChild(window.m_script); window.m_script.addEventListener("load", () => { alert("Script has been loaded successfully."); window.m_script.setAttribute("src", "https://raw.githubusercontent.com/jaideng1/currency-conversion-boombox/main/main.js"); document.body.appendChild(window.m_script); window.m_script.addEventListener("error", (e) => { alert("There was an error loading the script."); console.warn(e); }) }); console.log("called"); })();
+ */
